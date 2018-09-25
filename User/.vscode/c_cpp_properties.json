@@ -1,0 +1,85 @@
+{
+    "configurations": [
+        {
+            "name": "Mac",
+            "includePath": [
+                "/usr/include",
+                "/usr/local/include",
+                "${workspaceRoot}"
+            ],
+            "defines": [],
+            "intelliSenseMode": "clang-x64",
+            "browse": {
+                "path": [
+                    "/usr/include",
+                    "/usr/local/include",
+                    "${workspaceRoot}"
+                ],
+                "limitSymbolsToIncludedHeaders": true,
+                "databaseFilename": ""
+            },
+            "macFrameworkPath": [
+                "/System/Library/Frameworks",
+                "/Library/Frameworks"
+            ]
+        },
+        {
+            "name": "Linux",
+            "includePath": [
+                "/usr/include",
+                "/usr/local/include",
+                "${workspaceRoot}"
+            ],
+            "defines": [],
+            "intelliSenseMode": "clang-x64",
+            "browse": {
+                "path": [
+                    "/usr/include",
+                    "/usr/local/include",
+                    "${workspaceRoot}"
+                ],
+                "limitSymbolsToIncludedHeaders": true,
+                "databaseFilename": ""
+            }
+        },
+        {
+            "name": "Win32",
+            "includePath": [
+                "${workspaceRoot}",
+                "F:/Module Validation/STM8/STM8-8023-FT/User/Head",
+                "D:/ST_Library/STM8S_StdPeriph_Lib_V2.1.0/Libraries/STM8S_StdPeriph_Driver/inc",
+                "C:/llvm/lib/gcc/x86_64-w64-mingw32/7.1.0/include/c++",
+                "C:/llvm/lib/gcc/x86_64-w64-mingw32/7.1.0/include/c++/x86_64-w64-mingw32",
+                "C:/llvm/lib/gcc/x86_64-w64-mingw32/7.1.0/include/c++/backward",
+                "C:/llvm/lib/gcc/x86_64-w64-mingw32/7.1.0/include",
+                "C:/llvm/include",
+                "C:/llvm/x86_64-w64-mingw32/include",
+                "C:/llvm/lib/gcc/x86_64-w64-mingw32/7.1.0/include-fixed"
+            ],
+            "defines": [
+                "_DEBUG",
+                "UNICODE"
+            ],
+            "intelliSenseMode": "msvc-x64",
+            "browse": {
+                "path": [
+                    "${workspaceRoot}",
+                    "F:/Module Validation/STM8/STM8-8023-FT/User/Head",
+                    "D:/ST_Library/STM8S_StdPeriph_Lib_V2.1.0/Libraries/STM8S_StdPeriph_Driver/inc",
+                    "C:/llvm/lib/gcc/x86_64-w64-mingw32/7.1.0/include/c++",
+                    "C:/llvm/lib/gcc/x86_64-w64-mingw32/7.1.0/include/c++/x86_64-w64-mingw32",
+                    "C:/llvm/lib/gcc/x86_64-w64-mingw32/7.1.0/include/c++/backward",
+                    "C:/llvm/lib/gcc/x86_64-w64-mingw32/7.1.0/include",
+                    "C:/llvm/include",
+                    "C:/llvm/x86_64-w64-mingw32/include",
+                    "C:/llvm/lib/gcc/x86_64-w64-mingw32/7.1.0/include-fixed"
+                ],
+                "limitSymbolsToIncludedHeaders": true,
+                "databaseFilename": ""
+            },
+            "cStandard": "c11",
+            "cppStandard": "c++17"
+        }
+    ],
+    "version": 4
+}

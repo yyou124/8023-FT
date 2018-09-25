@@ -1,0 +1,14 @@
+{
+	"folders": [
+		{
+			"path": "User"
+		}
+	],
+	"settings": {
+		"files.associations": {
+			"config.h": "c",
+			"stm8s.h": "c",
+			"delay.h": "c"
+		}
+	}
+}
