@@ -7,7 +7,138 @@
  */
 /* Includes ------------------------------------------------------------------*/
 #include "config.h"
+/*******************************************************************************
+* Function Name  : PowerCtrl
+* Description    :
+* Input          : VddTest, VddTest
+* Output         : None
+* Return         : None
+*******************************************************************************/
+void PowerCtrl(u8 VddTest, u8 status)
+{
+  GPIO_Init(GPIOE, GPIO_PIN_3, GPIO_MODE_OUT_PP_HIGH_SLOW);  //VDD_CTL1
+  if(VddTest == _5_0V) //VddTest = 5V;
+  {
+    VDD_CTL1_H;
+  }
+  else if(VddTest == _3_3V) //VddTest = 3.3V;
+  {
+    VDD_CTL1_L;
+  }
+  else
+  {
+    return;
+  }
+  if(status == OS1)
+  {
+    BL1551Ctrl(VddTest,_X_XV,VddTest);
+    _74CTRL(_74_PULL);
+  }
+  else if(status == OS2)
+  {
+    BL1551Ctrl(VddTest,_0_0V,_X_XV);
+    _74CTRL(_74_SINK);
+  }
+  else if(status == NORL)
+  {
+    BL1551Ctrl(VddTest,VddTest,_0_0V);
+    _74CTRL(_74_HRS);
+  }
+  else{
+    return;
+  }
+}
+/*******************************************************************************
+* Function Name  : BL1551Ctrl
+* Description    :
+* Input          : VddTest, DutVDD, DutVSS
+* Output         : None
+* Return         : None
+*******************************************************************************/
+void BL1551Ctrl(u8 VddTest, u8 DutVDD, u8 DutVSS)
+{
 
+  //Init Pins VddTest = 5V; DutVDD = z; DutVSS = z
+  GPIO_Init(GPIOE, GPIO_PIN_3, GPIO_MODE_OUT_PP_HIGH_SLOW);  //VDD_CTL1
+  GPIO_Init(GPIOE, GPIO_PIN_5, GPIO_MODE_OUT_PP_LOW_SLOW);  //VDD_CTL2
+  GPIO_Init(GPIOE, GPIO_PIN_6, GPIO_MODE_OUT_PP_HIGH_SLOW);  //VDD_CTL3
+  GPIO_Init(GPIOG, GPIO_PIN_1, GPIO_MODE_OUT_PP_LOW_SLOW);  //VDD_CTL4
+  //VddTest ctrl
+  if(VddTest == _5_0V) //VddTest = 5V;
+  {
+    VDD_CTL1_H;
+  }
+  else if(VddTest == _3_3V) //VddTest = 3.3V;
+  {
+    VDD_CTL1_L;
+  }
+  else
+  {
+    return;
+  }
+
+  if((DutVDD == _X_XV) && (DutVSS == _X_XV))//DutVDD = z; DutVSS = z
+  {
+    VDD_CTL2_H;
+    VDD_CTL3_H;
+    VDD_CTL4_L;
+  }
+  else if((DutVDD == VddTest) && (DutVSS == _0_0V))//DutVDD = VddTest; DutVSS = 0
+  {
+    VDD_CTL2_H;
+    VDD_CTL3_L;
+    VDD_CTL4_H;
+  }
+  else if((DutVDD == _X_XV) && (DutVSS == VddTest))//DutVDD = z; DutVSS = VddTest
+  {
+    VDD_CTL2_L;
+    VDD_CTL3_L;
+    VDD_CTL4_L;
+  }
+  else if((DutVDD == _0_0V) && (DutVSS == _X_XV))//DutVDD = 0; DutVSS = z
+  {
+    VDD_CTL2_L;
+    VDD_CTL3_H;
+    VDD_CTL4_H;
+  }
+  else
+  {
+    return;
+  }
+}
+
+/*******************************************************************************
+* Function Name  : _74CTRL
+* Description    :
+* Input          : _74STAT
+* Output         : None
+* Return         : None
+*******************************************************************************/
+void _74CTRL(u8 _74STAT)
+{
+  GPIO_Init(GPIOC, GPIO_PIN_6, GPIO_MODE_OUT_PP_HIGH_SLOW);  //_74_CTRL
+  GPIO_Init(GPIOC, GPIO_PIN_7, GPIO_MODE_OUT_PP_HIGH_SLOW);  //OE_N
+
+  if(_74STAT == _74_PULL) //Pull current
+  {
+    OE_N_L;
+    _74_CTRL_L;
+  }
+  else if(_74STAT == _74_SINK)  //Sink current
+  {
+    OE_N_L;
+    _74_CTRL_H;
+  }
+  else if(_74STAT == _74_HRS) //High resistance state
+  {
+    OE_N_H;
+  }
+  else
+  {
+    return;
+  }
+
+}
 /*******************************************************************************
 * Function Name  : Cmd_Flag
 * Description    : Decode UART input parameters
